@@ -1,0 +1,11 @@
+# 新闻资讯下载器 依赖
+flask>=2.2
+requests>=2.28
+beautifulsoup4>=4.11
+lxml>=4.9
+python-docx>=0.8.11
+Pillow>=9.0
+openpyxl>=3.0
+# 腾讯国际/要闻两个站点需要 Selenium + Chrome（可选）
+selenium>=4.10
+# 如需把 Word 转成 PDF，请另装 LibreOffice（见启动说明）

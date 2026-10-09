@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新闻资讯下载器</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- 顶部 -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="brand">
+          <span class="logo">📰</span>
+          <h1>新闻资讯下载器</h1>
+        </div>
+        <p class="subtitle">15 类新闻站点 · 文字 + 新闻图片 + 视频链接 · 一键打包为 Word</p>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">今天</span>
+        <span class="badge badge-y">前一天</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. 选择新闻站点 -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2><span class="step-num">1</span>选择新闻站点</h2>
+        <div class="head-actions">
+          <label class="switch-wrap">
+            <input type="checkbox" id="selectAll">
+            <span>全选</span>
+          </label>
+          <span id="selectedCount" class="count-pill">已选 0 / 0</span>
+        </div>
+      </div>
+      <div class="site-grid" id="siteGrid">
+        <!-- 由 JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- 2. 下载设置 -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2><span class="step-num">2</span>下载设置</h2>
+      </div>
+      <div class="settings">
+        <div class="setting-row">
+          <div class="setting-label">下载日期</div>
+          <div class="date-options" id="dateOptions">
+            <label class="date-chip">
+              <input type="checkbox" value="today" checked>
+              <span class="chip-face">
+                <b>今天</b><small id="todayLabel">--</small>
+              </span>
+            </label>
+            <label class="date-chip">
+              <input type="checkbox" value="yesterday">
+              <span class="chip-face">
+                <b>前一天</b><small id="yesterdayLabel">--</small>
+              </span>
+            </label>
+          </div>
+          <div class="hint">勾选后，将在保存目录下自动创建「新闻资讯 日期」子文件夹</div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-label">输出格式</div>
+          <div class="format-options">
+            <label class="fmt-chip active" data-fmt="docx">
+              <input type="radio" name="format" value="docx" checked>
+              <span>📄 Word (.docx)</span>
+            </label>
+            <label class="fmt-chip" data-fmt="pdf">
+              <input type="radio" name="format" value="pdf">
+              <span>📕 PDF (.pdf)</span>
+            </label>
+          </div>
+          <div class="hint">PDF 需本机安装 LibreOffice，未安装时自动回退为 docx</div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-label">保存目录</div>
+          <div class="dir-bar">
+            <input type="text" id="outDir" placeholder="点「选择文件夹」或直接粘贴/输入保存路径" spellcheck="false">
+            <button id="btnBrowse" class="btn btn-ghost">选择文件夹</button>
+            <button id="btnOpen" class="btn btn-ghost" disabled>打开</button>
+          </div>
+          <div class="hint">可点「选择文件夹」浏览；若弹窗未出现，<b>可直接在此输入/粘贴路径</b>。子文件夹命名示例：<code>新闻资讯 20261008</code>（当天）· <code>新闻资讯 20261007</code>（前一天）</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 操作 -->
+    <section class="panel actions-panel">
+      <div class="action-buttons">
+        <button id="btnRun" class="btn btn-primary btn-lg">
+          <span class="btn-icon">⬇</span> 一键下载
+        </button>
+        <button id="btnStop" class="btn btn-danger btn-lg" disabled>■ 停止</button>
+      </div>
+      <div class="hint center">单个站点 → 保存为「站点名 日期.docx」；全部站点 → 每个站点一个文件，按日期归档</div>
+    </section>
+
+    <!-- 4. 进度 -->
+    <section class="panel" id="progressPanel" style="display:none">
+      <div class="panel-head">
+        <h2><span class="step-num">4</span>下载进度</h2>
+        <span id="overallState" class="state-pill">准备中</span>
+      </div>
+      <div class="overall">
+        <div class="progress-track">
+          <div class="progress-fill" id="overallBar" style="width:0%"></div>
+        </div>
+        <div class="overall-meta">
+          <span id="overallText">0 / 0</span>
+          <span id="elapsed"></span>
+        </div>
+      </div>
+      <div class="site-progress" id="siteProgress">
+        <!-- 每站点状态卡 -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">新闻资讯下载器 · 本机运行 · 数据来源为各新闻站点公开页面</footer>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

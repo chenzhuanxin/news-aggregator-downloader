@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# PyInstaller 构建产物（发布版 exe 通过 GitHub Release 提供，不入库）
+build/
+dist/
+*.spec
+
+# 本地演示/测试输出
+演示输出/
+_前端验证/
+_最终验证/
+_全量测速/
+_并发测速/
+_诊断输出/
+_腾讯验证/
+_下载验证/
+
+# 日志
+*.log
+
+# 系统
+Thumbs.db
+.DS_Store
